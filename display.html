@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        
+        #displayTable {
+            margin: 50px auto;
+            border-collapse: collapse;
+            width: 80%;
+            max-width: 800px;
+            background-color: #fff;
+        }
+        
+        #displayTable th,
+        #displayTable td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        #displayTable th {
+            background-color: #f2f2f2;
+        }
+        
+        @media screen and (max-width: 600px) {
+            #displayTable {
+                width: 100%;
+                margin: 20px auto;
+            }
+        }
+        .container {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .back-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 16px 20px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .back-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Products</a>
+    </div>
+    <table id="displayTable">
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Location</th>
+            <th>Amount of Money</th>
+        </tr>
+    </table>
+    <script>
+        // Function to extract URL parameters
+        function getParams() {
+            var params = {};
+            var queryString = window.location.search.substring(1);
+            var pairs = queryString.split("&");
+            for (var i = 0; i < pairs.length; i++) {
+                var pair = pairs[i].split("=");
+                params[pair[0]] = decodeURIComponent(pair[1].replace(/\+/g, ' '));
+            }
+            return params;
+        }
+    
+        // Function to display form data in table
+        function displayFormData() {
+            var params = getParams();
+            var displayTable = document.getElementById("displayTable");
+    
+            var newRow = displayTable.insertRow();
+            var nameCell = newRow.insertCell(0);
+            var ageCell = newRow.insertCell(1);
+            var locationCell = newRow.insertCell(2);
+            var amountCell = newRow.insertCell(3);
+    
+            nameCell.textContent = params.name || "-";
+            ageCell.textContent = params.age || "-";
+            locationCell.textContent = params.location || "-";
+            amountCell.textContent = params.amount || "-";
+        }
+    
+        // Call the displayFormData() function after the DOM content has loaded
+        document.addEventListener("DOMContentLoaded", function() {
+            displayFormData();
+        });
+    </script>
+    
+    
+    
+</body>
+</html>
